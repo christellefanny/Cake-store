@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cake Delight</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #fff0f6;
+      color: #333;
+    }
+    header {
+      background: #ff4d88;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+      font-size: 1.5rem;
+    }
+    .hero {
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+    .hero img {
+      max-width: 200px;
+      margin: 1rem 0;
+    }
+    .hero button {
+      background: #ff4d88;
+      color: white;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      padding: 1rem;
+    }
+    .card {
+      background: white;
+      border-radius: 10px;
+      padding: 1rem;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .card img {
+      max-width: 100%;
+      border-radius: 10px;
+    }
+    .card h3 {
+      margin: 0.5rem 0;
+    }
+    .card button {
+      background: #ff4d88;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    #cart {
+      background: #fff;
+      padding: 1rem;
+      margin: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    #cart h2 {
+      margin-top: 0;
+    }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: #ff4d88;
+      color: white;
+      margin-top: 1rem;
+    }
+
+    /* Mobile-friendly tweaks */
+    @media (max-width: 600px) {
+      header {
+        font-size: 1.2rem;
+        padding: 0.8rem;
+      }
+      .hero img {
+        width: 150px;
+      }
+      .hero button {
+        width: 100%;
+        font-size: 1.1rem;
+      }
+      .card {
+        padding: 0.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>🎂 Cake Delight</header>
+
+  <section class="hero">
+    <h1>Delicious Cakes, Just a Click Away!</h1>
+    <img src="https://i.imgur.com/7k3Y6gR.png" alt="Cake">
+    <br>
+    <button onclick="document.getElementById('cart').scrollIntoView({behavior: 'smooth'})">
+      🛒 View Cart
+    </button>
+  </section>
+
+  <section class="grid">
+    <div class="card">
+      <img src="https://i.imgur.com/M8dQJzT.png" alt="Chocolate Cake">
+      <h3>Chocolate Cake</h3>
+      <p>$25</p>
+      <button onclick="addToCart('Chocolate Cake', 25)">Add to Cart</button>
+    </div>
+    <div class="card">
+      <img src="https://i.imgur.com/lp1mM0z.png" alt="Vanilla Cake">
+      <h3>Vanilla Cake</h3>
+      <p>$20</p>
+      <button onclick="addToCart('Vanilla Cake', 20)">Add to Cart</button>
+    </div>
+    <div class="card">
+      <img src="https://i.imgur.com/6WtxlP3.png" alt="Strawberry Cake">
+      <h3>Strawberry Cake</h3>
+      <p>$22</p>
+      <button onclick="addToCart('Strawberry Cake', 22)">Add to Cart</button>
+    </div>
+  </section>
+
+  <section id="cart">
+    <h2>Your Cart</h2>
+    <ul id="cart-items"></ul>
+    <p><strong>Total: $<span id="total">0</span></strong></p>
+  </section>
+
+  <footer>
+    © 2025 Cake Delight – All Rights Reserved
+  </footer>
+
+  <script>
+    let cart = [];
+    function addToCart(name, price) {
+      cart.push({ name, price });
+      renderCart();
+    }
+    function renderCart() {
+      const list = document.getElementById('cart-items');
+      const total = document.getElementById('total');
+      list.innerHTML = '';
+      let sum = 0;
+      cart.forEach(item => {
+        const li = document.createElement('li');
+        li.textContent = `${item.name} - $${item.price}`;
+        list.appendChild(li);
+        sum += item.price;
+      });
+      total.textContent = sum;
+    }
+  </script>
+</body>
+</html>
